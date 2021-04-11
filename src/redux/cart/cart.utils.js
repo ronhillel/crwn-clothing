@@ -1,13 +1,27 @@
-export const addItemToCard = (cardItems, cardItemToAdd) => {
-    const existingCardItem = cardItems.find(cardItem => cardItem.id === cardItemToAdd.id);
+export const addItemToCart = (cartItems, cartItemToAdd) => {
+    const existingCartItem = cartItems.find(cartItem => cartItem.id === cartItemToAdd.id);
 
-    if(existingCardItem){
-        return cardItems.map(cardItem => 
-            cardItem.id === cardItemToAdd.id
-                ? { ...cardItem, quantity: cardItem.quantity + 1 } 
-                : cardItem
+    if(existingCartItem){
+        return cartItems.map(cartItem => 
+            cartItem.id === cartItemToAdd.id
+                ? { ...cartItem, quantity: cartItem.quantity + 1 } 
+                : cartItem
         );
     }
 
-    return [...cardItems, { ...cardItemToAdd, quantity: 1 }];
+    return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
+};
+
+export const removeItemFromCart = (cartItems, cartItemToRemove) => {
+    const existingcartItem = cartItems.find(cartItem => cartItem.id === cartItemToRemove.id);
+
+    if(existingcartItem.quantity === 1){
+        return cartItems.filter(cartItem => cartItem.id !== cartItemToRemove.id);
+    }
+
+    return cartItems.map(cartItem => 
+        cartItem.id === cartItemToRemove.id
+        ? {...cartItem, quantity: cartItem.quantity - 1} 
+        : cartItem
+    );
 };
