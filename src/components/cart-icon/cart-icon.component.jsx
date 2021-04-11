@@ -13,7 +13,7 @@ const CartIcon = ({ toggleCartHidden, cartItemsCounter }) => (
 );
 
 const mapStateToProps = ({ cart: { cartItems } }) => ({
-    cartItemsCounter: cartItems.length
+    cartItemsCounter: cartItems.reduce((accumulator, curItem) => accumulator + curItem.quantity, 0)
 });
 
 const mapDispatchToProps = dispatch => ({
